@@ -8,6 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..900;1,6..96,400..900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=PT+Serif:ital,wght@0,400;0,700;1,400;1,700&family=Questrial&display=swap" rel="stylesheet">
 
 <script src="https://cdn.tailwindcss.com"></script>
 <script>
@@ -25,6 +26,8 @@
         fontFamily: {
           sans: ['"Bodoni Moda"', 'serif'],
           bodoni: ['"Bodoni Moda"', 'serif'],
+          centurySerif: ['"PT Serif"', 'serif'],       // clone Century Schoolbook
+          centuryGothic: ['"Questrial"', 'sans-serif'], // clone Century Gothic
         },
       },
     },
@@ -37,7 +40,7 @@
     --header-h-scrolled: 8.5vh;
   }
 
-  html, body { font-family: 'Bodoni Moda', serif; }
+  html, body { font-family: 'centurySerif', serif; }
 
   /* Scroll fluide vers les ancrages, avec une marge pour ne jamais passer sous le header sticky */
   html {
