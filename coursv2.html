@@ -1,0 +1,739 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Espace Sèvres Danse — Cours réguliers</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..900;1,6..96,400..900&display=swap" rel="stylesheet">
+
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          primary: '#FFFFFF',
+          bgcolor: "#1A050D",
+          dark: '#4C0824',
+          card1: '#C2C2C2',
+          card2: '#868485',
+          bluecanard: '#004450',
+        },
+        fontFamily: {
+          sans: ['"Bodoni Moda"', 'serif'],
+          bodoni: ['"Bodoni Moda"', 'serif'],
+        },
+      },
+    },
+  };
+</script>
+
+<style>
+  :root {
+    --header-h: 15vh;
+    --header-h-scrolled: 8.5vh;
+  }
+
+  html, body { font-family: 'Bodoni Moda', serif; }
+
+  /* Scroll fluide vers les ancrages, avec une marge pour ne jamais passer sous le header sticky */
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: calc(var(--header-h) + 2rem);
+  }
+
+  /* Header shrink-on-scroll */
+  #site-header {
+    height: var(--header-h);
+    transition: height .35s ease;
+  }
+  body.is-scrolled #site-header { height: var(--header-h-scrolled); }
+
+  #brand-title { transition: font-size .35s ease; }
+  body.is-scrolled #brand-title { font-size: 1.65rem; }
+
+  #main-nav a { transition: font-size .35s ease; }
+  body.is-scrolled #main-nav a { font-size: 1.65rem; }
+
+  /* Colonnes de titre (Cours / Tarifs / Lieux) : chacune colle juste sous le header
+     (md et +) tant que SA section défile, puis repart naturellement avec elle quand
+     la section suivante prend le relais. Remonte avec le header au scroll.
+     Sans effet sur mobile puisqu'elles n'y sont pas en position sticky. */
+  .sticky-col {
+    top: var(--header-h);
+    transition: top .35s ease;
+  }
+  body.is-scrolled .sticky-col { top: var(--header-h-scrolled); }
+</style>
+</head>
+
+<body class="bg-bgcolor text-primary flex flex-col">
+
+
+  <!-- ============ HEADER ============ -->
+  <header id="site-header" class="w-full flex-shrink-0 flex items-center bg-bgcolor border-b-[1px] border-primary sticky top-0 z-40">
+    <div class="w-full h-full flex items-center justify-between px-6 md:px-10 lg:px-14">
+
+      <!-- Brand -->
+      <a href="index.html">
+        <h1 id="brand-title" class="font-[500] uppercase leading-[0.96] tracking-tighter text-3xl md:text-4xl lg:text-5xl">
+          Espace Sèvres<br>Danse
+        </h1>
+      </a>
+
+
+      <!-- Nav -->
+      <nav id="main-nav" class="flex items-center gap-8 md:gap-10 lg:gap-12">
+        <a href="#" class="relative inline-block pb-2 tracking-tight text-lg md:text-3xl font-bold">
+          Cours
+          <span class="absolute left-1/2 -translate-x-1/2 bottom-0 w-1.5 h-1.5 rounded-full bg-primary"></span>
+        </a>
+        <a href="#" class="relative inline-block pb-2 tracking-tight text-lg md:text-3xl hover:opacity-60 transition-opacity">
+          Danses
+          <span class="absolute left-1/2 -translate-x-1/2 bottom-0 w-1.5 h-1.5 rounded-full bg-primary opacity-0"></span>
+        </a>
+        <a href="#" class="relative inline-block pb-2 tracking-tight text-lg md:text-3xl hover:opacity-60 transition-opacity">
+          Galerie
+          <span class="absolute left-1/2 -translate-x-1/2 bottom-0 w-1.5 h-1.5 rounded-full bg-primary opacity-0"></span>
+        </a>
+        <a href="#" class="relative inline-block pb-2 tracking-tight text-lg md:text-3xl hover:opacity-60 transition-opacity">
+          Actus
+          <span class="absolute left-1/2 -translate-x-1/2 bottom-0 w-1.5 h-1.5 rounded-full bg-primary opacity-0"></span>
+        </a>
+        <a href="#" class="relative inline-block pb-2 tracking-tight text-lg md:text-3xl hover:opacity-60 transition-opacity">
+          Contact
+          <span class="absolute left-1/2 -translate-x-1/2 bottom-0 w-1.5 h-1.5 rounded-full bg-primary opacity-0"></span>
+        </a>
+      </nav>
+
+    </div>
+  </header>
+
+  <!-- ============ BODY : ASIDE + LISTE ============ -->
+  <div class="flex-1 flex flex-col md:flex-row md:items-start px-6 md:px-10 lg:px-14 gap-8 md:gap-12 lg:gap-16 pb-24">
+
+    <!-- ASIDE : filtres -->
+    <aside id="course-aside" class="sticky-col w-full md:w-[25%] md:flex-shrink-0 md:sticky md:self-start z-10 pt-10 md:pt-16 pb-6 md:pb-10">
+      <h2 class="text-4xl md:text-6xl font-[600] leading-[1.05] tracking-tight">
+        Cours<br>réguliers
+      </h2>
+
+      <div class="w-14 h-px bg-primary/40 my-8"></div>
+
+      <p class="uppercase tracking-widest text-xs font-semibold text-primary/70 mb-5">Filtres</p>
+
+      <div class="flex flex-wrap gap-2.5">
+        <button class="px-4 py-1 rounded-full border-[1px] border-primary uppercase text-sm tracking-wide hover:bg-primary hover:text-bgcolor transition-colors duration-200">
+          Adultes
+        </button>
+        <button class="px-4 py-1 rounded-full border-[1px] border-primary uppercase text-sm tracking-wide hover:bg-primary hover:text-bgcolor transition-colors duration-200">
+          Enfants
+        </button>
+        <button class="px-4 py-1 rounded-full border-[1px] border-primary uppercase text-sm tracking-wide hover:bg-primary hover:text-bgcolor transition-colors duration-200">
+          Débutant
+        </button>
+        <button class="px-4 py-1 rounded-full border-[1px] border-primary uppercase text-sm tracking-wide hover:bg-primary hover:text-bgcolor transition-colors duration-200">
+          Intermédiaire
+        </button>
+        <button class="px-4 py-1 rounded-full border-[1px] border-primary uppercase text-sm tracking-wide hover:bg-primary hover:text-bgcolor transition-colors duration-200">
+          Avancé
+        </button>
+        <button class="px-4 py-1 rounded-full border-[1px] border-primary uppercase text-sm tracking-wide leading-snug text-left hover:bg-primary hover:text-bgcolor transition-colors duration-200">
+          Enseignements réglementés
+        </button>
+      </div>
+    </aside>
+
+    <!-- LISTE DES COURS (scrollable) -->
+    <main id="course-list" class="flex-1 pt-2 md:pt-16 pb-16">
+
+      <p class="text-primary/80 leading-relaxed mb-10 md:mb-12 md:text-xl">
+        Un minimum de 7 couples/cours inscrits est requis. Le forum sur Sèvres aura lieu le samedi 5 septembre et ESD sera représenté. Les cours ont lieu du lundi 14 septembre 2026 jusqu'au mercredi 30 juin 2027. Les cours seront suspendus pendant toutes les vacances scolaires 2026-2027 de la zone C, sauf le lundi de Pentecôte.
+      </p>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-x-6 lg:gap-x-8 gap-y-14 lg:gap-y-16">
+
+        <!-- Card 1 : Rock - 2 -->
+        <article class="group flex flex-col hover:border-bluecanard transition-colors duration-300 cursor-pointer">
+          <div class="border-l-2 border-primary group-hover:border-bluecanard px-5 transition-colors duration-300">
+            <h3 class="text-2xl md:text-5xl font-[500] py-2 leading-snug group-hover:text-bluecanard transition-colors duration-300">Rock - 2</h3>
+          </div>
+          <div class="mt-4 overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1736552723645-9ce633f134c6?q=80&w=1200&auto=format&fit=crop"
+                 alt="Couple dansant sur une piste éclairée de bleu et de rouge"
+                 class="w-full aspect-[16/9] object-cover transition duration-500 group-hover:brightness-[0.55] group-hover:scale-[1.02]">
+          </div>
+          <div class="flex items-center justify-between py-4">
+            <a href="#" class="inline-flex items-center gap-1 font-[400] group-hover:text-bluecanard transition-colors duration-300">
+              <span class="uppercase">En savoir plus</span>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+            </a>
+            <div class="text-right leading-tight group-hover:text-bluecanard transition-colors duration-300">
+                <span class="block text-lg md:text-xl font-bold uppercase tracking-wide">Mercredi</span>
+                <span class="block text-sm md:text-base font-normal opacity-90">18h00 - 20h00</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- Card 1 : Rock - 2 -->
+        <article class="group flex flex-col hover:border-dark transition-colors duration-300 cursor-pointer">
+            <div class="border-l-2 border-primary group-hover:border-dark px-5 transition-colors duration-300">
+              <h3 class="text-2xl md:text-5xl font-[500] py-2 leading-snug group-hover:text-dark transition-colors duration-300">Rock - 2</h3>
+            </div>
+            <div class="mt-4 overflow-hidden">
+              <img src="https://images.unsplash.com/photo-1736552723645-9ce633f134c6?q=80&w=1200&auto=format&fit=crop"
+                   alt="Couple dansant sur une piste éclairée de bleu et de rouge"
+                   class="w-full aspect-[16/9] object-cover transition duration-500 group-hover:brightness-[0.55] group-hover:scale-[1.02]">
+            </div>
+            <div class="flex items-center justify-between py-4">
+              <a href="#" class="inline-flex items-center gap-1 font-[400] group-hover:text-dark transition-colors duration-300">
+                <span class="uppercase">En savoir plus</span>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+              </a>
+              <div class="text-right leading-tight group-hover:text-dark transition-colors duration-300">
+                  <span class="block text-lg md:text-xl font-bold uppercase tracking-wide">Mercredi</span>
+                  <span class="block text-sm md:text-base font-normal opacity-90">18h00 - 20h00</span>
+              </div>
+            </div>
+          </article>
+
+        <!-- Card 3 : Salon - Moyen 3 -->
+        <article class="group flex flex-col hover:border-dark transition-colors duration-300 cursor-pointer">
+            <div class="border-l-2 border-primary group-hover:border-dark px-5 transition-colors duration-300">
+              <h3 class="text-2xl md:text-5xl font-[500] py-2 leading-snug group-hover:text-dark transition-colors duration-300">Rock - 2</h3>
+            </div>
+            <div class="mt-4 overflow-hidden">
+              <img src="https://images.unsplash.com/photo-1736552723645-9ce633f134c6?q=80&w=1200&auto=format&fit=crop"
+                   alt="Couple dansant sur une piste éclairée de bleu et de rouge"
+                   class="w-full aspect-[16/9] object-cover transition duration-500 group-hover:brightness-[0.55] group-hover:scale-[1.02]">
+            </div>
+            <div class="flex items-center justify-between py-4">
+              <a href="#" class="inline-flex items-center gap-1 font-[400] group-hover:text-dark transition-colors duration-300">
+                <span class="uppercase">En savoir plus</span>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+              </a>
+              <div class="text-right leading-tight group-hover:text-dark transition-colors duration-300">
+                  <span class="block text-lg md:text-xl font-bold uppercase tracking-wide">Mercredi</span>
+                  <span class="block text-sm md:text-base font-normal opacity-90">18h00 - 20h00</span>
+              </div>
+            </div>
+          </article>
+
+        <!-- Card 4 : Tango Argentin - 2 -->
+        <article class="group flex flex-col hover:border-dark transition-colors duration-300 cursor-pointer">
+            <div class="border-l-2 border-primary group-hover:border-dark px-5 transition-colors duration-300">
+              <h3 class="text-2xl md:text-5xl font-[500] py-2 leading-snug group-hover:text-dark transition-colors duration-300">Rock - 2</h3>
+            </div>
+            <div class="mt-4 overflow-hidden">
+              <img src="https://images.unsplash.com/photo-1736552723645-9ce633f134c6?q=80&w=1200&auto=format&fit=crop"
+                   alt="Couple dansant sur une piste éclairée de bleu et de rouge"
+                   class="w-full aspect-[16/9] object-cover transition duration-500 group-hover:brightness-[0.55] group-hover:scale-[1.02]">
+            </div>
+            <div class="flex items-center justify-between py-4">
+              <a href="#" class="inline-flex items-center gap-1 font-[400] group-hover:text-dark transition-colors duration-300">
+                <span class="uppercase">En savoir plus</span>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+              </a>
+              <div class="text-right leading-tight group-hover:text-dark transition-colors duration-300">
+                  <span class="block text-lg md:text-xl font-bold uppercase tracking-wide">Mercredi</span>
+                  <span class="block text-sm md:text-base font-normal opacity-90">18h00 - 20h00</span>
+              </div>
+            </div>
+          </article>
+
+        <!-- Card 5 : Tango Argentin - 3 -->
+        <article class="group flex flex-col hover:border-dark transition-colors duration-300 cursor-pointer">
+          <div class="border-l-2 border-primary group-hover:border-dark px-5 transition-colors duration-300">
+            <h3 class="text-2xl md:text-5xl font-[500] py-2 leading-snug group-hover:text-dark transition-colors duration-300">Rock - 2</h3>
+          </div>
+          <div class="mt-4 overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1736552723645-9ce633f134c6?q=80&w=1200&auto=format&fit=crop"
+                 alt="Couple dansant sur une piste éclairée de bleu et de rouge"
+                 class="w-full aspect-[16/9] object-cover transition duration-500 group-hover:brightness-[0.55] group-hover:scale-[1.02]">
+          </div>
+          <div class="flex items-center justify-between py-4">
+            <a href="#" class="inline-flex items-center gap-1 font-[400] group-hover:text-dark transition-colors duration-300">
+              <span class="uppercase">En savoir plus</span>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+            </a>
+            <div class="text-right leading-tight group-hover:text-dark transition-colors duration-300">
+                <span class="block text-lg md:text-xl font-bold uppercase tracking-wide">Mercredi</span>
+                <span class="block text-sm md:text-base font-normal opacity-90">18h00 - 20h00</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- Card 6 : Rock - Initiation -->
+        <article class="group flex flex-col hover:border-dark transition-colors duration-300 cursor-pointer">
+          <div class="border-l-2 border-primary group-hover:border-dark px-5 transition-colors duration-300">
+            <h3 class="text-2xl md:text-5xl font-[500] py-2 leading-snug group-hover:text-dark transition-colors duration-300">Rock - 2</h3>
+          </div>
+          <div class="mt-4 overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1736552723645-9ce633f134c6?q=80&w=1200&auto=format&fit=crop"
+                 alt="Couple dansant sur une piste éclairée de bleu et de rouge"
+                 class="w-full aspect-[16/9] object-cover transition duration-500 group-hover:brightness-[0.55] group-hover:scale-[1.02]">
+          </div>
+          <div class="flex items-center justify-between py-4">
+            <a href="#" class="inline-flex items-center gap-1 font-[400] group-hover:text-dark transition-colors duration-300">
+              <span class="uppercase">En savoir plus</span>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+            </a>
+            <div class="text-right leading-tight group-hover:text-dark transition-colors duration-300">
+                <span class="block text-lg md:text-xl font-bold uppercase tracking-wide">Mercredi</span>
+                <span class="block text-sm md:text-base font-normal opacity-90">18h00 - 20h00</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- Card 7 : Entraînement & Préparation Médailles -->
+        <article class="group flex flex-col hover:border-dark transition-colors duration-300 cursor-pointer">
+          <div class="border-l-2 border-primary group-hover:border-dark px-5 transition-colors duration-300">
+            <h3 class="text-2xl md:text-5xl font-[500] py-2 leading-snug group-hover:text-dark transition-colors duration-300">Rock - 2</h3>
+          </div>
+          <div class="mt-4 overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1736552723645-9ce633f134c6?q=80&w=1200&auto=format&fit=crop"
+                 alt="Couple dansant sur une piste éclairée de bleu et de rouge"
+                 class="w-full aspect-[16/9] object-cover transition duration-500 group-hover:brightness-[0.55] group-hover:scale-[1.02]">
+          </div>
+          <div class="flex items-center justify-between py-4">
+            <a href="#" class="inline-flex items-center gap-1 font-[400] group-hover:text-dark transition-colors duration-300">
+              <span class="uppercase">En savoir plus</span>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+            </a>
+            <div class="text-right leading-tight group-hover:text-dark transition-colors duration-300">
+                <span class="block text-lg md:text-xl font-bold uppercase tracking-wide">Mercredi</span>
+                <span class="block text-sm md:text-base font-normal opacity-90">18h00 - 20h00</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- Card 8 : Salon - Avancé 3 -->
+        <article class="group flex flex-col hover:border-dark transition-colors duration-300 cursor-pointer">
+          <div class="border-l-2 border-primary group-hover:border-dark px-5 transition-colors duration-300">
+            <h3 class="text-2xl md:text-5xl font-[500] py-2 leading-snug group-hover:text-dark transition-colors duration-300">Rock - 2</h3>
+          </div>
+          <div class="mt-4 overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1736552723645-9ce633f134c6?q=80&w=1200&auto=format&fit=crop"
+                 alt="Couple dansant sur une piste éclairée de bleu et de rouge"
+                 class="w-full aspect-[16/9] object-cover transition duration-500 group-hover:brightness-[0.55] group-hover:scale-[1.02]">
+          </div>
+          <div class="flex items-center justify-between py-4">
+            <a href="#" class="inline-flex items-center gap-1 font-[400] group-hover:text-dark transition-colors duration-300">
+              <span class="uppercase">En savoir plus</span>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+            </a>
+            <div class="text-right leading-tight group-hover:text-dark transition-colors duration-300">
+                <span class="block text-lg md:text-xl font-bold uppercase tracking-wide">Mercredi</span>
+                <span class="block text-sm md:text-base font-normal opacity-90">18h00 - 20h00</span>
+            </div>
+          </div>
+        </article>
+
+      </div>
+    </main>
+
+  </div>
+
+  <!-- ============ PASSAGE DES MÉDAILLES ============ -->
+  <div class="flex flex-col md:flex-row md:items-start px-6 md:px-10 lg:px-14 gap-8 md:gap-12 lg:gap-16 pb-24">
+
+    <!-- ASIDE : titre -->
+    <aside id="medailles-aside" class="sticky-col w-full md:w-[25%] md:flex-shrink-0 md:sticky md:self-start z-10 pt-10 md:pt-16 pb-6 md:pb-10">
+      <h2 class="text-4xl md:text-6xl font-[600] leading-[1.05] tracking-tight">
+        Passage des<br>Médailles
+      </h2>
+
+      <div class="w-14 h-px bg-primary/40 my-8"></div>
+    </aside>
+
+    <!-- CONTENU : 3 niveaux, côte à côte -->
+    <main class="flex-1 pt-2 md:pt-16 pb-16">
+
+      <p class="text-primary/80 leading-relaxed mb-10 md:mb-12 md:text-xl">
+        En marge des cours, stages et pratiques, Espace Sèvres Danse prépare celles et ceux qui le souhaitent au passage des Médailles : un examen face à un jury, organisé vers la fin du mois de juin, pour un grade reconnu par la Fédération des Sports de Danse de France, sanctionné par un diplôme et la remise d'une médaille (ou Étoile). Le parcours se déroule en 3 niveaux progressifs, dans une ou plusieurs des 3 catégories de danse proposées par l'école.
+      </p>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
+
+        <!-- Étoile de Bronze -->
+        <article class="group relative overflow-hidden px-8 py-10 md:py-12 flex flex-col justify-between min-h-[260px] md:min-h-[300px] transition-transform duration-300 hover:-translate-y-1 hover:shadow-xl cursor-pointer" style="background-color:#868485;">
+          <span class="absolute -top-3 -right-2 text-8xl md:text-9xl font-extrabold italic text-bgcolor/10 select-none leading-none pointer-events-none">01</span>
+
+          <div class="relative z-10">
+            <h3 class="text-3xl md:text-4xl font-extrabold text-bgcolor leading-tight mb-3">Étoile de<br>Bronze</h3>
+            <p class="text-sm text-bgcolor/80 leading-relaxed">Sur évaluation du professeur.</p>
+          </div>
+
+          <a href="passage-des-medailles.html#bronze" class="relative z-10 inline-flex items-center gap-1 text-bgcolor font-semibold mt-8">
+            <span class="uppercase text-sm tracking-wide">En savoir plus</span>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="transition-transform duration-300 group-hover:translate-x-1"><polyline points="9 18 15 12 9 6"></polyline></svg>
+          </a>
+        </article>
+
+        <!-- Étoile d'Argent -->
+        <article class="group relative overflow-hidden px-8 py-10 md:py-12 flex flex-col justify-between min-h-[260px] md:min-h-[300px] transition-transform duration-300 hover:-translate-y-1 hover:shadow-xl cursor-pointer" style="background-color:#C2C2C2;">
+          <span class="absolute -top-3 -right-2 text-8xl md:text-9xl font-extrabold italic text-bgcolor/10 select-none leading-none pointer-events-none">02</span>
+
+          <div class="relative z-10">
+            <h3 class="text-3xl md:text-4xl font-extrabold text-bgcolor leading-tight mb-3">Étoile<br>d'Argent</h3>
+            <p class="text-sm text-bgcolor/80 leading-relaxed">Sur titre de l'Étoile de Bronze.</p>
+          </div>
+
+          <a href="passage-des-medailles.html#argent" class="relative z-10 inline-flex items-center gap-1 text-bgcolor font-semibold mt-8">
+            <span class="uppercase text-sm tracking-wide">En savoir plus</span>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="transition-transform duration-300 group-hover:translate-x-1"><polyline points="9 18 15 12 9 6"></polyline></svg>
+          </a>
+        </article>
+
+        <!-- Étoile de Vermeil -->
+        <article class="group relative overflow-hidden px-8 py-10 md:py-12 flex flex-col justify-between min-h-[260px] md:min-h-[300px] transition-transform duration-300 hover:-translate-y-1 hover:shadow-xl cursor-pointer" style="background-color:#FBFBFB;">
+          <span class="absolute -top-3 -right-2 text-8xl md:text-9xl font-extrabold italic text-bgcolor/10 select-none leading-none pointer-events-none">03</span>
+
+          <div class="relative z-10">
+            <h3 class="text-3xl md:text-4xl font-extrabold text-bgcolor leading-tight mb-3">Étoile de<br>Vermeil</h3>
+            <p class="text-sm text-bgcolor/80 leading-relaxed">Sur titre de l'Étoile d'Argent.</p>
+          </div>
+
+          <a href="passage-des-medailles.html#vermeil" class="relative z-10 inline-flex items-center gap-1 text-bgcolor font-semibold mt-8">
+            <span class="uppercase text-sm tracking-wide">En savoir plus</span>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="transition-transform duration-300 group-hover:translate-x-1"><polyline points="9 18 15 12 9 6"></polyline></svg>
+          </a>
+        </article>
+
+      </div>
+    </main>
+
+  </div>
+
+  <!-- ============ LIEUX & SALLES ============ -->
+  <div class="flex flex-col md:flex-row md:items-start px-6 md:px-10 lg:px-14 gap-8 md:gap-12 lg:gap-16 pb-24">
+
+    <!-- ASIDE : titre -->
+    <aside id="lieux-aside" class="sticky-col w-full md:w-[25%] md:flex-shrink-0 md:sticky md:self-start z-10 pt-10 md:pt-16 pb-6 md:pb-10">
+      <h2 class="text-4xl md:text-6xl font-[600] leading-[1.05] tracking-tight">
+        Lieux &<br>Salles
+      </h2>
+
+      <div class="w-14 h-px bg-primary/40 my-8"></div>
+    </aside>
+
+    <!-- GRILLE DES SALLES -->
+    <main class="flex-1 pt-2 md:pt-16 pb-16">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-x-6 lg:gap-x-8 gap-y-14 lg:gap-y-16">
+
+        <!-- Carte 1 : Lieu des entraînements -->
+        <article class="group flex flex-col hover:border-dark transition-colors duration-300 cursor-pointer">
+          <div class="border-l-2 border-primary group-hover:border-dark px-5 transition-colors duration-300">
+            <h3 class="text-2xl md:text-4xl font-[500] pt-2 leading-snug group-hover:text-dark transition-colors duration-300">Lieu des entraînements</h3>
+            <p class="text-sm md:text-base text-primary/70 group-hover:text-dark transition-colors duration-300 mt-2 mb-1">Salle des Cent Gardes, 45 Grande Rue,<br/>92310 Sèvres</p>
+            <p class="text-xs uppercase tracking-wide text-primary/50 group-hover:text-dark transition-colors duration-300 pb-3">Accès : Bus 171 — T2 Musée de Sèvres</p>
+          </div>
+          <div class="mt-4 overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1679034718813-6a959b39d9d7?q=80&w=1600&h=700&auto=format&fit=crop"
+                  alt="Salle vide au parquet clair, lumière naturelle"
+                  class="w-full aspect-[21/9] object-cover transition duration-500 group-hover:brightness-[0.55] group-hover:scale-[1.02]">
+          </div>
+          <div class="flex items-center py-4">
+            <a href="#" class="inline-flex items-center gap-1 font-[400] group-hover:text-dark transition-colors duration-300">
+              <span class="uppercase">Voir sur la carte</span>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+            </a>
+          </div>
+        </article>
+
+        <!-- Carte 2 : Lieu des cours -->
+        <article class="group flex flex-col hover:border-dark transition-colors duration-300 cursor-pointer">
+          <div class="border-l-2 border-primary group-hover:border-dark px-5 transition-colors duration-300">
+            <h3 class="text-2xl md:text-4xl font-[500] pt-2 leading-snug group-hover:text-dark transition-colors duration-300">Lieu des cours</h3>
+            <p class="text-sm md:text-base text-primary/70 group-hover:text-dark transition-colors duration-300 mt-2 mb-1">Gymnase des Bruyères, 12 route Pavé des Gardes,<br/>92310 Sèvres</p>
+            <p class="text-xs uppercase tracking-wide text-primary/50 group-hover:text-dark transition-colors duration-300 pb-3">Accès : Bus 179 — 279</p>
+          </div>
+          <div class="mt-4 overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1629219222026-e48dcc036c3f?q=80&w=1600&h=700&auto=format&fit=crop"
+                  alt="Parquet de salle de danse, ambiance dynamique"
+                  class="w-full aspect-[21/9] object-cover transition duration-500 group-hover:brightness-[0.55] group-hover:scale-[1.02]">
+          </div>
+          <div class="flex items-center py-4">
+            <a href="#" class="inline-flex items-center gap-1 font-[400] group-hover:text-dark transition-colors duration-300">
+              <span class="uppercase">Voir sur la carte</span>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+            </a>
+          </div>
+        </article>
+
+      </div>
+    </main>
+
+  </div>
+
+  <!-- ============ TARIFS & INSCRIPTIONS ============ -->
+  <div class="flex flex-col md:flex-row md:items-start px-6 md:px-10 lg:px-14 gap-8 md:gap-12 lg:gap-16 pb-24">
+
+    <!-- ASIDE : infos pratiques -->
+    <aside id="tarifs-aside" class="sticky-col w-full md:w-[25%] md:flex-shrink-0 md:sticky md:self-start z-10 pt-10 md:pt-16 pb-6 md:pb-10">
+      <h2 class="text-4xl md:text-6xl font-[600] leading-[1.05] tracking-tight">
+        Tarifs &<br>Inscriptions
+      </h2>
+
+      <div class="w-14 h-px bg-primary/40 my-8"></div>
+
+      <div class="space-y-4 text-sm md:text-base leading-relaxed text-primary/80">
+        <p>Adhésion à l'Association et assurance annuelles obligatoires : <span class="font-semibold text-primary">17 €</span></p>
+        <p>Règlements échelonnés possibles. Chèque(s) à établir à l'ordre de E.S.D.</p>
+        <p>Les forfaits ne sont pas remboursables.</p>
+        <p class="pt-2 font-semibold text-primary">Contact : Marie-Nicole VARDON — 06 64 82 25 06</p>
+      </div>
+    </aside>
+
+    <!-- GRILLE DES TARIFS -->
+    <main class="flex-1 pt-2 md:pt-16 pb-16">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-x-6 lg:gap-x-8 gap-y-6 lg:gap-y-8">
+
+        <!-- Carte 1 : 1 cours/semaine — Individuel -->
+        <article class="group border-l-2 text-card1 border-card1 hover:border-primary transition-colors duration-300 cursor-pointer px-6 py-4">
+          <p class="uppercase tracking-wide text-sm font-semibold text-card1/80 group-hover:text-primary transition-colors duration-300 mb-3">1 cours/semaine • Individuel</p>
+          <p class="text-4xl md:text-5xl font-extrabold leading-none group-hover:text-primary transition-colors duration-300">230 <span class="text-2xl md:text-3xl font-bold">€</span> <span class="text-base font-semibold align-top">/ an</span></p>
+          <p class="text-sm text-card1/60 group-hover:text-primary transition-colors duration-300 mt-3">265 € / an pour les non-Sévriens</p>
+          <div class="flex justify-end mt-6 md:mt-8">
+            <a href="#modalites-inscription" class="inline-block px-6 py-2 rounded-full uppercase bg-card1 group-hover:bg-primary text-white font-semibold no-underline transition-colors duration-300">
+              Inscription
+            </a>
+          </div>
+        </article>
+
+        <!-- Carte 2 : 1 cours/semaine — Couple -->
+        <article class="group border-l-2 text-card2 border-card2 hover:border-primary transition-colors duration-300 cursor-pointer px-6 py-4">
+          <p class="uppercase tracking-wide text-sm font-semibold text-card2/80 group-hover:text-primary transition-colors duration-300 mb-3">1 cours/semaine • Couple</p>
+          <p class="text-4xl md:text-5xl font-extrabold leading-none group-hover:text-primary transition-colors duration-300">400 <span class="text-2xl md:text-3xl font-bold">€</span> <span class="text-base font-semibold align-top">/ an</span></p>
+          <p class="text-sm text-card2/60 group-hover:text-primary transition-colors duration-300 mt-3">460 € / an pour les non-Sévriens</p>
+          <div class="flex justify-end mt-6 md:mt-8">
+            <a href="#modalites-inscription" class="inline-block px-6 py-2 rounded-full uppercase bg-card2 group-hover:bg-primary text-white font-semibold no-underline transition-colors duration-300">
+              Inscription
+            </a>
+          </div>
+        </article>
+        
+
+        <!-- Carte 3 : 2 cours/semaine — Individuel -->
+        <article class="group border-l-2 text-card1 border-card1 hover:border-primary transition-colors duration-300 cursor-pointer px-6 py-4">
+          <p class="uppercase tracking-wide text-sm font-semibold text-card1/80 group-hover:text-primary transition-colors duration-300 mb-3">2 cours/semaine • Individuel</p>
+          <p class="text-4xl md:text-5xl font-extrabold leading-none group-hover:text-primary transition-colors duration-300">400 <span class="text-2xl md:text-3xl font-bold">€</span> <span class="text-base font-semibold align-top">/ an</span></p>
+          <p class="text-sm text-card1/60 group-hover:text-primary transition-colors duration-300 mt-3">460 € / an pour les non-Sévriens</p>
+          <div class="flex justify-end mt-6 md:mt-8">
+            <a href="#modalites-inscription" class="inline-block px-6 py-2 rounded-full uppercase bg-card1 group-hover:bg-primary text-white font-semibold no-underline transition-colors duration-300">
+              Inscription
+            </a>
+          </div>
+        </article>
+
+        <!-- Carte 4 : 2 cours/semaine — Couple -->
+        <article class="group border-l-2 text-card2 border-card2 hover:border-primary transition-colors duration-300 cursor-pointer px-6 py-4">
+          <p class="uppercase tracking-wide text-sm font-semibold text-card2/80 group-hover:text-primary transition-colors duration-300 mb-3">2 cours/semaine • Couple</p>
+          <p class="text-4xl md:text-5xl font-extrabold leading-none group-hover:text-primary transition-colors duration-300">680 <span class="text-2xl md:text-3xl font-bold">€</span> <span class="text-base font-semibold align-top">/ an</span></p>
+          <p class="text-sm text-card2/60 group-hover:text-primary transition-colors duration-300 mt-3">750 € / an pour les non-Sévriens</p>
+          <div class="flex justify-end mt-6 md:mt-8">
+            <a href="#modalites-inscription" class="inline-block px-6 py-2 rounded-full uppercase bg-card2 group-hover:bg-primary text-white font-semibold no-underline transition-colors duration-300">
+              Inscription
+            </a>
+          </div>
+        </article>
+
+        <!-- Carte 5 : 3 cours/semaine — Individuel -->
+        <article class="group border-l-2 text-card1 border-card1 hover:border-primary transition-colors duration-300 cursor-pointer px-6 py-4">
+          <p class="uppercase tracking-wide text-sm font-semibold text-card1/80 group-hover:text-primary transition-colors duration-300 mb-3">3 cours/semaine • Individuel</p>
+          <p class="text-4xl md:text-5xl font-extrabold leading-none group-hover:text-primary transition-colors duration-300">525 <span class="text-2xl md:text-3xl font-bold">€</span> <span class="text-base font-semibold align-top">/ an</span></p>
+          <p class="text-sm text-card1/60 group-hover:text-primary transition-colors duration-300 mt-3">580 € / an pour les non-Sévriens</p>
+          <div class="flex justify-end mt-6 md:mt-8">
+            <a href="#modalites-inscription" class="inline-block px-6 py-2 rounded-full uppercase bg-card1 group-hover:bg-primary text-white font-semibold no-underline transition-colors duration-300">
+              Inscription
+            </a>
+          </div>
+        </article>
+
+        <!-- Carte 6 : 3 cours/semaine — Couple -->
+        <article class="group border-l-2 text-card2 border-card2 hover:border-primary transition-colors duration-300 cursor-pointer px-6 py-4">
+          <p class="uppercase tracking-wide text-sm font-semibold text-card2/80 group-hover:text-primary transition-colors duration-300 mb-3">3 cours/semaine • Couple</p>
+          <p class="text-4xl md:text-5xl font-extrabold leading-none group-hover:text-primary transition-colors duration-300">845 <span class="text-2xl md:text-3xl font-bold">€</span> <span class="text-base font-semibold align-top">/ an</span></p>
+          <p class="text-sm text-card2/60 group-hover:text-primary transition-colors duration-300 mt-3">900 € / an pour les non-Sévriens</p>
+          <div class="flex justify-end mt-6 md:mt-8">
+            <a href="#modalites-inscription" class="inline-block px-6 py-2 rounded-full uppercase bg-card2 group-hover:bg-primary text-white font-semibold no-underline transition-colors duration-300">
+              Inscription
+            </a>
+          </div>
+        </article>
+
+        <!-- Carte 7 : 4 cours/semaine — Individuel -->
+        <article class="group border-l-2 text-card1 border-card1 hover:border-primary transition-colors duration-300 cursor-pointer px-6 py-4">
+          <p class="uppercase tracking-wide text-sm font-semibold text-card1/80 group-hover:text-primary transition-colors duration-300 mb-3">4 cours/semaine • Individuel</p>
+          <p class="text-4xl md:text-5xl font-extrabold leading-none group-hover:text-primary transition-colors duration-300">580 <span class="text-2xl md:text-3xl font-bold">€</span> <span class="text-base font-semibold align-top">/ an</span></p>
+          <p class="text-sm text-card1/60 group-hover:text-primary transition-colors duration-300 mt-3">670 € / an pour les non-Sévriens</p>
+          <div class="flex justify-end mt-6 md:mt-8">
+            <a href="#modalites-inscription" class="inline-block px-6 py-2 rounded-full uppercase bg-card1 group-hover:bg-primary text-white font-semibold no-underline transition-colors duration-300">
+              Inscription
+            </a>
+          </div>
+        </article>
+
+        <!-- Carte 8 : 4 cours/semaine — Couple -->
+        <article class="group border-l-2 text-card2 border-card2 hover:border-primary transition-colors duration-300 cursor-pointer px-6 py-4">
+          <p class="uppercase tracking-wide text-sm font-semibold text-card2/80 group-hover:text-primary transition-colors duration-300 mb-3">4 cours/semaine • Couple</p>
+          <p class="text-4xl md:text-5xl font-extrabold leading-none group-hover:text-primary transition-colors duration-300">950 <span class="text-2xl md:text-3xl font-bold">€</span> <span class="text-base font-semibold align-top">/ an</span></p>
+          <p class="text-sm text-card2/60 group-hover:text-primary transition-colors duration-300 mt-3">1120 € / an pour les non-Sévriens</p>
+          <div class="flex justify-end mt-6 md:mt-8">
+            <a href="#modalites-inscription" class="inline-block px-6 py-2 rounded-full uppercase bg-card2 group-hover:bg-primary text-white font-semibold no-underline transition-colors duration-300">
+              Inscription
+            </a>
+          </div>
+        </article>
+
+        <!-- Carte 9 : 5 cours/semaine — Individuel -->
+        <article class="group border-l-2 text-card1 border-card1 hover:border-primary transition-colors duration-300 cursor-pointer px-6 py-4">
+          <p class="uppercase tracking-wide text-sm font-semibold text-card1/80 group-hover:text-primary transition-colors duration-300 mb-3">5 cours/semaine • Individuel</p>
+          <p class="text-4xl md:text-5xl font-extrabold leading-none group-hover:text-dark transition-colors duration-300">665 <span class="text-2xl md:text-3xl font-bold">€</span> <span class="text-base font-semibold align-top">/ an</span></p>
+          <p class="text-sm text-card1/60 group-hover:text-primary transition-colors duration-300 mt-3">785 € / an pour les non-Sévriens</p>
+          <div class="flex justify-end mt-6 md:mt-8">
+            <a href="#modalites-inscription" class="inline-block px-6 py-2 rounded-full uppercase bg-card1 group-hover:bg-primary text-white font-semibold no-underline transition-colors duration-300">
+              Inscription
+            </a>
+          </div>
+        </article>
+
+        <!-- Carte 10 : 5 cours/semaine — Couple -->
+        <article class="group border-l-2 text-card2 border-card2 hover:border-primary transition-colors duration-300 cursor-pointer px-6 py-4">
+          <p class="uppercase tracking-wide text-sm font-semibold text-card2/80 group-hover:text-primary transition-colors duration-300 mb-3">5 cours/semaine • Couple</p>
+          <p class="text-4xl md:text-5xl font-extrabold leading-none group-hover:text-primary transition-colors duration-300">1130 <span class="text-2xl md:text-3xl font-bold">€</span> <span class="text-base font-semibold align-top">/ an</span></p>
+          <p class="text-sm text-card2/60 group-hover:text-primary transition-colors duration-300 mt-3">1330 € / an pour les non-Sévriens</p>
+          <div class="flex justify-end mt-6 md:mt-8">
+            <a href="#modalites-inscription" class="inline-block px-6 py-2 rounded-full uppercase bg-card2 group-hover:bg-primary text-white font-semibold no-underline transition-colors duration-300">
+              Inscription
+            </a>
+          </div>
+        </article>
+
+      </div>
+
+    </main>
+
+  </div>
+
+  <!-- ============ SECTION PLEINE LARGEUR : MODALITÉS D'INSCRIPTION ============ -->
+  <section id="modalites-inscription" class="w-full bg-primary/[0.03] border-t border-primary/20 px-6 md:px-10 lg:px-14 py-16 md:py-24">
+    <div class="max-w-7xl mx-auto">
+      
+      <!-- Titre de la section -->
+      <h3 class="text-3xl md:text-5xl font-[600] tracking-tight mb-12 md:mb-20">
+        Comment s'inscrire ?
+      </h3>
+
+      <!-- Grille en 3 colonnes ultra-aérées -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-16">
+
+        <!-- ================= ÉTAPE 1 ================= -->
+        <div class="relative pt-4">
+          <!-- Chiffre géant en filigrane (arrière-plan) -->
+          <span class="absolute -top-6 right-0 text-7xl md:text-9xl italic font-extrabold text-primary/10 select-none leading-none z-0">01</span>
+          
+          <!-- Contenu (au premier plan) -->
+          <div class="relative z-10">
+            <h4 class="text-xl md:text-2xl font-bold mb-4">Télécharger la fiche</h4>
+            <p class="text-sm md:text-base text-primary/80 leading-relaxed mb-6">
+              Téléchargez la fiche d'inscription d'Espace Sèvres Danse, imprimez-la et complétez-la avec vos informations.
+            </p>
+            <a href="#" class="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-dark hover:bg-primary hover:text-bgcolor text-white font-semibold no-underline transition-colors duration-300 shadow-sm">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"></path><path d="m7 10 5 5 5-5"></path><path d="M5 21h14"></path></svg>
+              Télécharger (PDF)
+            </a>
+          </div>
+        </div>
+
+        <!-- ================= ÉTAPE 2 ================= -->
+        <div class="relative pt-4">
+          <!-- Chiffre géant en filigrane (arrière-plan) -->
+          <span class="absolute -top-6 right-0 text-7xl md:text-9xl italic font-extrabold text-primary/10 select-none leading-none z-0">02</span>
+          
+          <!-- Contenu (au premier plan) -->
+          <div class="relative z-10">
+            <h4 class="text-xl md:text-2xl font-bold mb-4">Préparer le règlement</h4>
+            <p class="text-sm md:text-base text-primary/80 leading-relaxed">
+              Le ou les chèques sont à établir à l'ordre de <span class="font-semibold text-primary">E.S.D.</span> Un règlement échelonné en 3 fois sans frais est possible. Pensez à inclure l'adhésion à l'association et l'assurance annuelles obligatoires (<span class="font-semibold text-primary">17 €</span>).
+            </p>
+          </div>
+        </div>
+
+        <!-- ================= ÉTAPE 3 ================= -->
+        <div class="relative pt-4">
+          <!-- Chiffre géant en filigrane (arrière-plan) -->
+          <span class="absolute -top-6 right-0 text-7xl md:text-9xl italic font-extrabold text-primary/10 select-none leading-none z-0">03</span>
+          
+          <!-- Contenu (au premier plan) -->
+          <div class="relative z-10">
+            <h4 class="text-xl md:text-2xl font-bold mb-4">Déposer votre dossier</h4>
+            <p class="text-sm md:text-base text-primary/80 leading-relaxed">
+              À remettre en main propre sur notre stand lors du Forum des Associations de Sèvres le samedi 5 septembre, ou directement à votre professeur lors de votre premier cours de danse.
+            </p>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  
+
+  <!-- ============ FOOTER ============ -->
+  <footer id="site-footer" class="w-full bg-bgcolor text-primary px-6 md:px-10 lg:px-14 pt-16 pb-12">
+    <div class="max-w-7xl mx-auto flex flex-col justify-between gap-12 md:gap-16">
+
+      <!-- Haut du footer : Nom de l'école géant + Infos de contact -->
+      <div class="flex flex-col md:flex-row md:items-end justify-between gap-8">
+        
+        <!-- Nom de l'école en énorme sur deux lignes -->
+        <h2 class="font-[600] uppercase leading-[0.9] tracking-tighter text-4xl md:text-6xl lg:text-7xl">
+          Espace Sèvres<br>Danse
+        </h2>
+
+        <!-- Coordonnées et contact en petit -->
+        <div class="text-sm md:text-base leading-relaxed text-primary/80 md:text-right space-y-1">
+          <p class="font-bold text-primary tracking-wide uppercase text-xs opacity-90">Association E.S.D.</p>
+          <p>45 Grande Rue / 12 route Pavé des Gardes, 92310 Sèvres</p>
+          <p>Contact : Marie-Nicole VARDON — <a href="tel:0664822506" class="underline decoration-primary/50 hover:text-white hover:decoration-white transition-colors duration-200">06 64 82 25 06</a></p>
+        </div>
+
+      </div>
+
+      <!-- Ligne de séparation fine -->
+      <div class="w-full h-px bg-primary/20"></div>
+
+      <!-- Bas du footer : Mentions légales & Copyright -->
+      <div class="flex flex-col sm:flex-row items-center justify-between gap-4 text-xs md:text-sm text-primary/60">
+        <p>© 2026 Espace Sèvres Danse. Tous droits réservés.</p>
+        
+        <div class="flex flex-wrap items-center justify-center gap-6 text-primary/80">
+          <a href="#" class="hover:text-white hover:underline transition-colors duration-200">Mentions légales</a>
+          <a href="#" class="hover:text-white hover:underline transition-colors duration-200">Politique de confidentialité</a>
+          <a href="#" class="hover:text-white hover:underline transition-colors duration-200">Règlement intérieur</a>
+          <a href="#" class="hover:text-white hover:underline transition-colors duration-200">Contact</a>
+        </div>
+      </div>
+
+    </div>
+  </footer>
+
+  <script>
+    function updateScrollState() {
+      document.body.classList.toggle('is-scrolled', window.scrollY > 10);
+    }
+
+    window.addEventListener('scroll', updateScrollState, { passive: true });
+
+    // 2. Gestion de l'aura lumineuse Bleu Canard au survol
+    const spotlight = document.getElementById('spotlight');
+  
+  </script>
+
+</body>
+</html>
